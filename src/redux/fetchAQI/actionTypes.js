@@ -1,0 +1,2 @@
+export const START_SOCKET_CONNECTION = "START_SOCKET_CONNECTION";
+export const ON_DATA = "ON_DATA";

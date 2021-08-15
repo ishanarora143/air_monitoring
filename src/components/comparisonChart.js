@@ -1,11 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { Chart } from "@antv/g2";
 
-const client = new W3CWebSocket("ws://city-ws.herokuapp.com");
-
-function ComparisonChart() {
-  const [data, setData] = useState({});
+function ComparisonChart({ data }) {
   const [aqi_chart, setAqiChart] = useState();
   const elementRef = useRef();
 
@@ -84,46 +80,20 @@ function ComparisonChart() {
     chart.render();
   }, []);
 
-  useEffect(() => {
-    let chart_data = Object.keys(data).map((el) => {
-      let obj = {};
-      obj.city = el || "";
-      obj.updated_at = data[el].updated_at;
-      obj.aqi = data[el]["aqi"][data[el]["aqi"].length - 1] || 0;
-      return obj;
-    });
+  let chart_data = Object.keys(data).map((el) => {
+    let obj = {};
+    obj.city = el || "";
+    obj.updated_at = data[el].updated_at;
+    obj.aqi = data[el]["aqi"][data[el]["aqi"].length - 1] || 0;
+    return obj;
+  });
 
-    console.log(chart_data);
-    if (aqi_chart && chart_data) {
-      aqi_chart.data(chart_data);
-      aqi_chart.render();
-    }
-  }, [aqi_chart, data]);
+  //console.log(chart_data);
+  if (aqi_chart && chart_data) {
+    aqi_chart.data(chart_data);
+    aqi_chart.render();
+  }
 
-  useEffect(() => {
-    client.onopen = () => {
-      console.log("WebSocket Client Connected");
-    };
-    client.onmessage = (message) => {
-      let socket_data = JSON.parse(message.data);
-      let new_data = { ...data };
-      let date = Date.now();
-      socket_data.forEach((element) => {
-        if (new_data[element.city]) {
-          new_data[element.city]["aqi"].push(
-            parseFloat(element.aqi.toFixed(2))
-          );
-          new_data[element.city]["updated_at"] = date;
-        } else {
-          new_data[element.city] = {
-            aqi: [parseFloat(element.aqi.toFixed(2))],
-            updated_at: date,
-          };
-        }
-      });
-      setData({ ...new_data });
-    };
-  }, [data]);
   return <div ref={elementRef}></div>;
 }
 
