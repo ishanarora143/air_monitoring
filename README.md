@@ -1,70 +1,107 @@
-# Getting Started with Create React App
+# Real-Time AQI Monitoring 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Demo Link 
 
-## Available Scripts
+- [Air-Monitoring](http://air-monitoring.s3-website.ap-south-1.amazonaws.com)
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Air-Monitoring is Web Application that displays real time AQI of different cities of India.
+It contains city wise comparision of AQI in chart and tabular format and also contains a guage chart of  live AQI data of a selected city
 
-### `npm test`
+## Table of Contents
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+  * [Features](#features)
+  * [Tech and Libraries](#tech)
+  * [Installation](#installation)
+  * [Contacts](#contacts)
+  * [License](#license)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Features
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Select a city to get live aqi in guage chart.
+ ![Live AQI of Seleceted City](https://air-monitoring.s3.ap-south-1.amazonaws.com/Screenshot+2021-08-15+at+11.04.15+PM.png "Live AQI")
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Comparison of live aqi of cities in Bar chart
+ ![Comparison Chart](https://air-monitoring.s3.ap-south-1.amazonaws.com/Screenshot+2021-08-15+at+11.04.27+PM.png "Comparison Chart")
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Comparison of live aqi of cities in Tabular form
+ ![AQI comparison Table](https://air-monitoring.s3.ap-south-1.amazonaws.com/Screenshot+2021-08-15+at+11.04.37+PM.png "Table")
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Tech and Libraries
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [ReactJS] - HTML enhanced for web apps!
+- [Ant-Design] - Components library for Reactjs
+- [Antv] - Javascript Chart lib
+- [AWS] - Static web hosting
+- [Circle-CI] - CICD
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## Prerequisites
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The prerequisites that you have to install before using the app
+```sh
+npm install npm@latest -g
+```
+## Installation
 
-### Making a Progressive Web App
+TrackMe requires [Node.js](https://nodejs.org/) v10+ to run.
+Install the dependencies and devDependencies and start the frontend server.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```sh
+cd air-monitoring
+npm i
+npm start
+```
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+## Out of Scope
+-  Line Chart of selected city aqi vs time
+-  Progressive web application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Time Taken
+-  It took me around 1.5 days ( i.e 14 hours ) to build the single page application
+-  Reading antv ( charting library ) documentation  - 4 hours
+-  Code setup and building the charts and table - 6 hours
+-  Setting up CICD Pipeline and deploying the code - 2 hours
+-  Finishing up and writing the readme file - 2 hours
+-  For me the part that took extra time was using a new charting library , i am familiar with billboardjs ( js charting library ). But i wanted to use a new library to get more crisp-ui so i went on with the ant vision library.
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+## Contacts
+
+- Ishan Arora [LinkedIn-Ishan] - [<eshanarora00001@gmail.com>]
+
+## License
+
+MIT
+
+**Free Software, Hell Yeah!**
+
+
+
+   [LinkedIn-Ishan]: <https://www.linkedin.com/in/ishan-arora-0001>
+   [AWS S3]: <https://aws.amazon.com/>
+   [AWS]: <https://aws.amazon.com/>
+   [Ant-Design]: <https://ant.design/>
+   [Antv]: <https://antv.vision/>
+    
+[Circle-CI]: <https://dashboard.heroku.com/>
+   
+   [ReactJS]: <http://reactjs.org>
+ 
+   
+   
+
+
