@@ -17,7 +17,7 @@ function SelectCity({ data, handleCityChange }) {
     <Select
       showSearch
       style={{ width: 200, alignSelf: "center", marginTop: 100 }}
-      placeholder="Select a person"
+      placeholder="Select a City"
       optionFilterProp="children"
       onChange={handleCityChange}
       onFocus={onFocus}
