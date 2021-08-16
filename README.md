@@ -25,13 +25,13 @@ It contains city wise comparision of AQI in chart and tabular format and also co
 ## Features
 
 - Select a city to get live aqi in guage chart.
- ![Live AQI of Seleceted City](https://air-monitoring.s3.ap-south-1.amazonaws.com/Screenshot+2021-08-15+at+11.04.15+PM.png "Live AQI")
+ ![Live AQI of Seleceted City](https://iasfileupload.s3.ap-south-1.amazonaws.com/Screenshot+2021-08-15+at+11.04.15+PM.png "Live AQI")
 
 - Comparison of live aqi of cities in Bar chart
- ![Comparison Chart](https://air-monitoring.s3.ap-south-1.amazonaws.com/Screenshot+2021-08-15+at+11.04.27+PM.png "Comparison Chart")
+ ![Comparison Chart](https://iasfileupload.s3.ap-south-1.amazonaws.com/Screenshot+2021-08-15+at+11.04.27+PM.png "Comparison Chart")
 
 - Comparison of live aqi of cities in Tabular form
- ![AQI comparison Table](https://air-monitoring.s3.ap-south-1.amazonaws.com/Screenshot+2021-08-15+at+11.04.37+PM.png "Table")
+ ![AQI comparison Table](https://iasfileupload.s3.ap-south-1.amazonaws.com/Screenshot+2021-08-15+at+11.04.37+PM.png "Table")
 
 
 ## Tech and Libraries
@@ -53,7 +53,7 @@ npm install npm@latest -g
 ```
 ## Installation
 
-TrackMe requires [Node.js](https://nodejs.org/) v10+ to run.
+Air Monitoring requires [Node.js](https://nodejs.org/) v10+ to run.
 Install the dependencies and devDependencies and start the frontend server.
 
 ```sh
