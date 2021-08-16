@@ -19,7 +19,9 @@ function Layout() {
   const { data } = useSelector((state) => state.fetch_aqi_data);
 
   const [city, setCity] = useState();
-
+  const [colSize, setSizeCol] = useState(() => {
+    return window.innerWidth < 780 ? 24 : 12;
+  });
   let dispatch = useDispatch();
   const handleCityChange = (city) => {
     setCity(city);
@@ -43,6 +45,18 @@ function Layout() {
         },
       ];
 
+  const handleResize = (e) => {
+    const windowSize = window.innerWidth;
+    if (windowSize < 780) {
+      setSizeCol(24);
+    } else {
+      setSizeCol(12);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div>
       <Online>
@@ -54,11 +68,11 @@ function Layout() {
           />
         </Row>
         <Row>
-          <Col span={12} className="chart">
+          <Col span={colSize} className="chart">
             <Title level={2}>Comparison Chart</Title>
             <ComparisonChart data={data} />
           </Col>
-          <Col span={12} className="chart">
+          <Col span={colSize} className="chart">
             <Title level={2}>Real-Time AQI</Title>
             <GuageChart cityData={cityData} city={city} />
           </Col>
