@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Chart } from "@antv/g2";
+import { convert_data, get_color } from "../../helpers/utils";
 
 function ComparisonChart({ data }) {
   const [aqi_chart, setAqiChart] = useState();
@@ -31,45 +32,7 @@ function ComparisonChart({ data }) {
         },
       })
       .style("aqi", (aqi) => {
-        if (aqi < 50) {
-          return {
-            fill: "#55A84F",
-          };
-        }
-        if (aqi < 100) {
-          return {
-            fill: "#A2C853",
-          };
-        }
-        if (aqi < 200) {
-          return {
-            fill: "#FFF832",
-          };
-        }
-        if (aqi < 300) {
-          return {
-            fill: "#F29C32",
-          };
-        }
-        if (aqi < 400) {
-          return {
-            fill: "#E93E33",
-          };
-        }
-        if (aqi < 500) {
-          return {
-            fill: "#AF2D24",
-          };
-        }
-
-        return {
-          fillOpacity: 1,
-          lineWidth: 0,
-          stroke: "#FF0000",
-          lineDash: [3, 2],
-          color: "#FF0000",
-          fill: "#FF00FF",
-        };
+        return { fill: get_color(aqi) };
       });
 
     chart.interaction("element-highlight");
@@ -80,15 +43,8 @@ function ComparisonChart({ data }) {
     chart.render();
   }, []);
 
-  let chart_data = Object.keys(data).map((el) => {
-    let obj = {};
-    obj.city = el || "";
-    obj.updated_at = data[el].updated_at;
-    obj.aqi = data[el]["aqi"][data[el]["aqi"].length - 1] || 0;
-    return obj;
-  });
+  let chart_data = convert_data(data);
 
-  //console.log(chart_data);
   if (aqi_chart && chart_data) {
     aqi_chart.data(chart_data);
     aqi_chart.render();

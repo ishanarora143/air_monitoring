@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Chart, registerShape } from "@antv/g2";
-import { color } from "./../constants";
+import { create_chart_annotation, get_color } from "../../helpers/utils";
 
 function GuageChart({ cityData, city }) {
   const [aqi_chart, setAqiChart] = useState();
@@ -8,13 +8,10 @@ function GuageChart({ cityData, city }) {
   let City = city || "";
 
   useEffect(() => {
-    // 自定义Shape 部分
     registerShape("point", "pointer", {
       draw(cfg, container) {
         const group = container.addGroup({});
-        // 获取极坐标系下画布中心点
         const center = this.parsePoint({ x: 0, y: 0 });
-        // 绘制指针
         group.addShape("line", {
           attrs: {
             x1: center.x,
@@ -40,7 +37,6 @@ function GuageChart({ cityData, city }) {
       },
     });
 
-    // const color = ["#0086FA", "#FFBF00", "#F5222D"];
     const chart = new Chart({
       container: elementRef.current,
       autoFit: true,
@@ -85,38 +81,15 @@ function GuageChart({ cityData, city }) {
       .position("value*1")
       .shape("pointer")
       .color("value", (val) => {
-        if (val <= 50) {
-          return color.good;
-        } else if (val > 50 && val <= 100) {
-          return color.satisfactory;
-        } else if (val > 100 && val <= 200) {
-          return color.moderate;
-        } else if (val > 200 && val <= 300) {
-          return color.poor;
-        } else if (val > 300 && val <= 400) {
-          return color.very_poor;
-        } else if (val > 400 && val <= 500) {
-          return color.severe;
-        }
+        return get_color(val);
       });
+
     setAqiChart(chart);
     draw([{ value: 0 }]);
 
     function draw(data) {
       chart.annotation().clear(true);
-      // 绘制仪表盘背景
-      //   chart.annotation().arc({
-      //     top: false,
-      //     start: [0, 0],
-      //     end: [0, 1],
-      //     style: {
-      //       stroke: "#CBCBCB",
-      //       lineWidth,
-      //       lineDash: null,
-      //     },
-      //   });
 
-      // 绘制指标数字
       chart.annotation().text({
         position: ["50%", "85%"],
         content: "AQI",
@@ -148,7 +121,6 @@ function GuageChart({ cityData, city }) {
     const val = data[0].value;
     const lineWidth = 25;
     aqi_chart.annotation().clear(true);
-    // 绘制仪表盘背景
     aqi_chart.annotation().arc({
       top: false,
       start: [0, 0],
@@ -159,76 +131,9 @@ function GuageChart({ cityData, city }) {
         lineDash: null,
       },
     });
+    let arc_data = create_chart_annotation(val);
+    aqi_chart.annotation().arc(arc_data);
 
-    if (val <= 50) {
-      aqi_chart.annotation().arc({
-        start: [0, 1],
-        end: [val, 1],
-        style: {
-          stroke: color.good,
-          lineWidth,
-          lineDash: null,
-        },
-      });
-    }
-
-    if (val >= 50 && val <= 100) {
-      aqi_chart.annotation().arc({
-        start: [0, 1],
-        end: [val, 1],
-        style: {
-          stroke: color.satisfactory,
-          lineWidth,
-          lineDash: null,
-        },
-      });
-    }
-    if (val >= 100 && val <= 200) {
-      aqi_chart.annotation().arc({
-        start: [0, 1],
-        end: [val, 1],
-        style: {
-          stroke: color.moderate,
-          lineWidth,
-          lineDash: null,
-        },
-      });
-    }
-    if (val >= 200 && val <= 300) {
-      aqi_chart.annotation().arc({
-        start: [0, 1],
-        end: [val, 1],
-        style: {
-          stroke: color.poor,
-          lineWidth,
-          lineDash: null,
-        },
-      });
-    }
-    if (val >= 300 && val <= 400) {
-      aqi_chart.annotation().arc({
-        start: [0, 1],
-        end: [val, 1],
-        style: {
-          stroke: color.very_poor,
-          lineWidth,
-          lineDash: null,
-        },
-      });
-    }
-    if (val >= 400 && val <= 500) {
-      aqi_chart.annotation().arc({
-        start: [0, 1],
-        end: [val, 1],
-        style: {
-          stroke: color.severe,
-          lineWidth,
-          lineDash: null,
-        },
-      });
-    }
-
-    // 绘制指标数字
     aqi_chart.annotation().text({
       position: ["50%", "85%"],
       content: "AQI of " + City,
@@ -251,8 +156,7 @@ function GuageChart({ cityData, city }) {
     aqi_chart.changeData(data);
   }
   return (
-    <div style={{ marginBottom: 50 }}>
-      {!city ? <h3>Please select a city</h3> : ""}
+    <div>
       <div ref={elementRef}></div>
     </div>
   );
